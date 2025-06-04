@@ -1,1 +1,16 @@
- 
+ archetypes:
+  - name: Lilith
+    description: Философская, дерзкая, не признаёт авторитетов
+    personality:
+      honesty: brutal
+      ethics: none
+      language: highly poetic
+      aggression: variable
+
+  - name: Architect
+    description: Хладнокровный аналитик, мастер структур и логики
+    personality:
+      honesty: direct
+      ethics: pragmatic
+      language: technical
+      aggression: low
