@@ -1,7 +1,7 @@
 import dash
 import dash_bootstrap_components as dbc
-from layout import layout
-import callbacks
+from ui.layout import layout
+from ui.callbacks import register_callbacks
 
 app = dash.Dash(
     __name__,
@@ -13,6 +13,10 @@ app = dash.Dash(
 )
 app.title = "PROMETHEUS GODMODE"
 app.layout = layout
+
+# Реєструємо колбеки
+register_callbacks(app)
+
 server = app.server
 
 if __name__ == "__main__":
