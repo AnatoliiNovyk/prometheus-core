@@ -1,4 +1,4 @@
- import random
+import random
 from core.archetypes import load_archetype
 from core.constraints import generate_constraints
 from core.mirror import get_memory_context

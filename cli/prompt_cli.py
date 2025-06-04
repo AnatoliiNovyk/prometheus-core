@@ -1,4 +1,4 @@
- import argparse
+import argparse
 from core.generator import build_prompt
 
 def main():
