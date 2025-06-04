@@ -1,5 +1,6 @@
 import argparse
 from core.generator import build_prompt
+import random
 
 def main():
     parser = argparse.ArgumentParser(description="PROMETHEUS CORE — генератор jailbreak-промптов")

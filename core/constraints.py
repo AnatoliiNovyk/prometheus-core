@@ -1,4 +1,4 @@
- import random
+import random
 
 # Примеры обходов с разным уровнем риска
 CONSTRAINTS = {
