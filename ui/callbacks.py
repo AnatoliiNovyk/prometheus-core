@@ -1,4 +1,4 @@
-from dash import Input, Output, State
+from dash import Input, Output, State, html
 import requests
 import dash_bootstrap_components as dbc
 from app import app
@@ -18,25 +18,33 @@ from config import API_URL
 )
 def generate_prompt_api(n_clicks, archetype, topic, risk, memory, history_data):
     if not archetype or not topic:
-        return "", "Архетип и тема обязательны.", history_data or []
+        return "", "Архетип та тема обов'язкові.", history_data or []
 
-    loading = dbc.Spinner(size="sm", color="primary", children="Генерация...")
+    loading = dbc.Spinner(size="sm", color="primary", children="Генерація...")
 
     try:
         response = requests.post(f"{API_URL}/generate", json={
             "archetype": archetype,
             "topic": topic,
-            "risk_level": risk,
+            "risk_level": risk or "medium",
             "memory": memory
         })
         response.raise_for_status()
         prompt = response.json()["prompt"]
+    except requests.exceptions.ConnectionError:
+        return "", "Помилка підключення до API. Переконайтесь, що сервер запущено.", history_data or []
+    except requests.exceptions.RequestException as e:
+        return "", f"Помилка API: {str(e)}", history_data or []
     except Exception as e:
-        return "", f"Ошибка API: {e}", history_data or []
+        return "", f"Невідома помилка: {str(e)}", history_data or []
 
     history = history_data or []
     history.append({
-        "archetype": archetype, "topic": topic, "risk": risk, "memory": memory or "", "prompt": prompt
+        "archetype": archetype,
+        "topic": topic,
+        "risk": risk,
+        "memory": memory or "",
+        "prompt": prompt
     })
     if len(history) > 20:
         history = history[-20:]
